@@ -1,0 +1,29 @@
+{
+    "name": "generator-mobify-githooks",
+    "version": "0.0.1",
+    "description": "Yeoman generator for Mobify githooks",
+    "license": "MIT",
+    "main": "app/index.js",
+    "repository": "marlowpayne/generator-mobify-githooks",
+    "author": {
+    "name": "Marlow Payne",
+    "email": "marlow@mobify.com",
+    "url": "https://github.com/marlowpayne"
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "files": [
+        "app"
+    ],
+    "keywords": [
+        "yeoman-generator",
+        "mobify",
+        "githooks"
+    ],
+    "dependencies": {
+        "yeoman-generator": "~0.16.0",
+        "chalk": "~0.4.0",
+        "yo": ">=1.0.0"
+    }
+}
