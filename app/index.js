@@ -15,18 +15,34 @@ var GithooksGenerator = yeoman.generators.Base.extend({
 });
 
 GithooksGenerator.prototype.app = function app() {
-    this.copy('package.json', 'package.json'); // TEST package.json
-    // TODO: Read existing package.json
+    // Read existing package.json
+    var packageJsonPath = './package.json';
+    var packageJsonFile = this.readFileAsString(packageJsonPath);
 
-    // TODO: Add grunt-githooks dependency to existing package.json
+    // Check that grunt-githooks isn't already in package.json
+    if (!/"grunt-githooks"/g.test(packageJsonFile)) {
 
-    // TODO: Copy githooks tasks/config/githooks.js and tasks/hooks/tasks.js
+        var dependenciesIndex = packageJsonFile.lastIndexOf('dependencies');
+
+        var dependenciesString = packageJsonFile.slice(dependenciesIndex);
+
+        var indexForDependencyInsertion = dependenciesIndex + dependenciesString.indexOf('}');
+
+        // Add grunt-githooks dependency to existing package.json
+        packageJsonFile = packageJsonFile.slice(0, indexForDependencyInsertion - 1) + ',\n"grunt-githooks": "0.3.1"\n' + packageJsonFile.slice(indexForDependencyInsertion);
+    }
+
+    if (!/"scripts"/g.test(packageJsonFile)) {
+        // TODO: Add postinstall npm scripts
+    }
+
+    // TODO: Write package.json file back out
+
+    // Copy githooks tasks/config/githooks.js and tasks/hooks/tasks.js
     this.copy('githooks.js', 'tasks/config/githooks.js');
     this.copy('tasks.js', 'tasks/hooks/tasks.js');
 
-    // TODO: Run 'grunt githooks' for user
-    // this.spawnCommand('grunt', ['githooks']);
-
+    // Leverage npm scripts to set up githooks
     this.on('end', function() {
         this.npmInstall();
     });
