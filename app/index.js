@@ -15,23 +15,21 @@ var GithooksGenerator = yeoman.generators.Base.extend({
 });
 
 GithooksGenerator.prototype.app = function app() {
+    this.copy('package.json', 'package.json'); // TEST package.json
     // TODO: Read existing package.json
 
     // TODO: Add grunt-githooks dependency to existing package.json
 
     // TODO: Copy githooks tasks/config/githooks.js and tasks/hooks/tasks.js
+    this.copy('githooks.js', 'tasks/config/githooks.js');
+    this.copy('tasks.js', 'tasks/hooks/tasks.js');
 
     // TODO: Run 'grunt githooks' for user
+    // this.spawnCommand('grunt', ['githooks']);
 
-
-    this.mkdir('testing-yeoman');
-
-    // this.copy('package.json', 'package.json');
-    // this.copy('Gruntfile.js', 'GruntFile.js');
-    // this.copy('_circle.yml', 'circle.yml');
-
-    // this.directory('nightwatch', 'tests/system');
-    // this.template('_site.json', 'tests/system/site.json');
+    this.on('end', function() {
+        this.npmInstall();
+    });
 };
 
 module.exports = GithooksGenerator;
