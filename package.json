@@ -11,7 +11,7 @@
     "url": "https://github.com/marlowpayne"
     },
     "engines": {
-        "node": ">=0.10.0"
+        "node": "0.12.2"
     },
     "files": [
         "app"
@@ -22,8 +22,8 @@
         "githooks"
     ],
     "dependencies": {
-        "yeoman-generator": "~0.16.0",
+        "yeoman-generator": "0.18.10",
         "chalk": "~0.4.0",
-        "yo": ">=1.0.0"
+        "yo": "1.5.0"
     }
 }

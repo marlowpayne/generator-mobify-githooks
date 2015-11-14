@@ -63,7 +63,8 @@ GithooksGenerator.prototype.app = function app() {
         }
     }
 
-    // TODO: Write package.json file back out
+    // Write package.json file back out
+    this.writeFileFromString(packageJsonFile, packageJsonPath);
 
     // Copy githooks tasks/config/githooks.js and tasks/hooks/tasks.js
     this.copy('githooks.js', 'tasks/config/githooks.js');
