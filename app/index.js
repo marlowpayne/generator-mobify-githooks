@@ -7,7 +7,6 @@ var chalk = require('chalk');
 
 var GithooksGenerator = yeoman.generators.Base.extend({
     init: function() {
-        this.log(this.yeoman);
         this.log(chalk.yellow(
             'Updating package.json with grunt-githooks dependency and setting up Mobify\'s git hooks...\n'
         ));
@@ -72,7 +71,7 @@ GithooksGenerator.prototype.app = function app() {
 
     // Leverage npm scripts to set up githooks
     this.on('end', function() {
-        this.npmInstall();
+        this.spawnCommand('npm', ['install']);
     });
 };
 
