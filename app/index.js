@@ -38,7 +38,7 @@ GithooksGenerator.prototype.app = function app() {
     }
 
     // Write package.json file back out
-    this.writeFileFromString(JSON.stringify(packageJson, null, 4), packageJsonPath); // 4 spaces as tabs
+    this.writeFileFromString(JSON.stringify(packageJson, null, 2), packageJsonPath); // Our package.json uses 2 spaces as whitespace
 
     // Copy githooks tasks/config/githooks.js and tasks/hooks/tasks.js
     this.copy('githooks.js', 'tasks/config/githooks.js');
