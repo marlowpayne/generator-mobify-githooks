@@ -14,14 +14,6 @@ var GithooksGenerator = yeoman.generators.Base.extend({
 });
 
 GithooksGenerator.prototype.app = function app() {
-    var _getIndexForDependencyInsertion = function(fileString) {
-        var dependenciesIndex = fileString.lastIndexOf('dependencies');
-
-        var dependenciesString = fileString.slice(dependenciesIndex);
-
-        return dependenciesIndex + dependenciesString.indexOf('}');
-    };
-
     // Read existing package.json
     var packageJsonPath = './package.json';
     var packageJsonString = this.readFileAsString(packageJsonPath);
@@ -29,9 +21,13 @@ GithooksGenerator.prototype.app = function app() {
 
     packageJson.dependencies['grunt-githooks'] = '0.3.1';
 
-    packageJson.scripts = packageJson.scripts ? packageJson.scripts['postinstall'] = 'grunt githooks' : {
-        'postinstall': 'grunt githooks'
-    };
+    if (packageJson.scripts) {
+        packageJson.scripts['postinstall'] = 'grunt githooks';
+    } else {
+        packageJson.scripts = {
+            'postinstall': 'grunt githooks'
+        };
+    }
 
     // Write package.json file back out
     this.writeFileFromString(JSON.stringify(packageJson, null, 4), packageJsonPath); // 4 spaces as tabs
