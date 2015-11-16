@@ -19,8 +19,16 @@ GithooksGenerator.prototype.app = function app() {
     var packageJsonString = this.readFileAsString(packageJsonPath);
     var packageJson = JSON.parse(packageJsonString);
 
-    packageJson.dependencies['grunt-githooks'] = '0.3.1';
+    // Add grunt-githooks dependency to package.json
+    if (packageJson.dependencies) {
+        packageJson.dependencies['grunt-githooks'] = '0.3.1';
+    } else {
+        packageJson.dependencies = {
+            'grunt-githooks': '0.3.1'
+        };
+    }
 
+    // Add postinstall npm script to set up githooks to package.json
     if (packageJson.scripts) {
         packageJson.scripts['postinstall'] = 'grunt githooks';
     } else {
