@@ -24,7 +24,7 @@ GithooksGenerator.prototype.app = function app() {
         packageJson.dependencies['grunt-githooks'] = '0.4.0';
     } else {
         packageJson.dependencies = {
-            'grunt-githooks': '0.3.1'
+            'grunt-githooks': '0.4.0'
         };
     }
 
